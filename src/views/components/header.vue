@@ -1,21 +1,19 @@
 <template>
-import func from './vue-temp/vue-editor-bridge';
     <div class="header-meu">
-        <span>竹影流浪</span>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1">首页</el-menu-item>
-            <el-menu-item index="1">归档</el-menu-item>
-            <el-menu-item index="1">标签</el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">我的工作台</template>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-                <el-menu-item index="2-3">选项3</el-menu-item>
-                <el-submenu index="2-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                <el-menu-item index="2-4-3">选项3</el-menu-item>
+            <el-menu-item index="2">归档</el-menu-item>
+            <el-menu-item index="3">标签</el-menu-item>
+            <el-submenu index="4">
+                <template slot="title">关于</template>
+                <el-menu-item index="2-1">作品</el-menu-item>
+                <el-menu-item index="2-2">书籍</el-menu-item>
+                <el-menu-item index="2-3">电影</el-menu-item>
+                <el-menu-item index="2-4">音乐</el-menu-item>
+                <el-submenu index="2-5">
+                <template slot="title">About Me</template>
+                <el-menu-item index="2-5-1">简历</el-menu-item>
+                <el-menu-item index="2-5-2">打赏</el-menu-item>
                 </el-submenu>
             </el-submenu>
         </el-menu>
