@@ -4,9 +4,10 @@
         <el-container>
             <el-header>
                 <header-meu></header-meu>
-                <br>
             </el-header>
-            <el-main class="main">内容</el-main>
+            <el-main>
+                <main-post-list></main-post-list>
+            </el-main>
         </el-container>
     </div>
     <el-container>
@@ -19,11 +20,13 @@
 <script>
 import header from './components/header.vue'
 import footer from './components/footer.vue'
+import postList from './components/postlist.vue'
 export default {
     name: 'home',
     components: {
         headerMeu: header,
-        footerMeu:footer
+        footerMeu:footer,
+        mainPostList:postList
     }
 };
 </script>
