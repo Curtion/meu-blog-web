@@ -5,7 +5,7 @@
                 <span>{{item.title}}</span>
             </div>
             <div class="text item">
-                {{item.content}}
+                {{summary(item.content)}}
             </div>
         </el-card>
     </div>
@@ -24,8 +24,13 @@ export default {
     },
     created: async function() {
         let data = (await axios.get("http://127.0.0.1/articles/lists/?limit=10&page=1")).data;
-        this.list = data.info.data
-        this.msg = data.msg
+        this.list = data.info.data;
+        this.msg = data.msg;
+    },
+    methods: {
+        summary: function(data) {
+            return data.match(/<!--markdown-->[\s\S*]/m);
+        }
     }
 }
 </script>
