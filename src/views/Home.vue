@@ -6,7 +6,14 @@
                 <header-meu></header-meu>
             </el-header>
             <el-main>
-                <main-post-list></main-post-list>
+                <el-row>
+                    <el-col :span="16">
+                        <main-post-list></main-post-list>
+                    </el-col>
+                    <el-col :span="8">
+                        <div class="aside"></div>
+                    </el-col>
+                </el-row>             
             </el-main>
         </el-container>
     </div>
@@ -30,3 +37,11 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+    .aside {
+        height: 100vh;
+        background-color: red;
+        margin-left: 5px;
+    }
+</style>
