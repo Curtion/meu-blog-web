@@ -1,27 +1,32 @@
 <template>
     <div class="post-list">
-        <el-card class="box-card">
+        <el-card v-for="item in list" :key="item.id" class="box-card">
             <div slot="header" class="clearfix">
-                <span>卡片名称</span>
+                <span>{{item.title}}</span>
             </div>
-            <div v-for="o in 4" :key="o" class="text item">
-                {{'列表内容 ' + o }}
-            </div>
-        </el-card>
-        <el-card class="box-card">
-            <div slot="header" class="clearfix">
-                <span>卡片名称</span>
-            </div>
-            <div v-for="o in 4" :key="o" class="text item">
-                {{'列表内容 ' + o }}
+            <div class="text item">
+                {{item.content}}
             </div>
         </el-card>
     </div>
 </template>
 
 <script>
+import axios from "axios"
+import { constants } from 'fs';
 export default {
-    name: 'postlist'
+    name: 'postlist',
+    data: () => {
+        return {
+            list: {},
+            msg: ""
+        }
+    },
+    created: async function() {
+        let data = (await axios.get("http://127.0.0.1/articles/lists/?limit=10&page=1")).data;
+        this.list = data.info.data
+        this.msg = data.msg
+    }
 }
 </script>
 
