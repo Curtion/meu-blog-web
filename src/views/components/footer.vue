@@ -2,7 +2,7 @@
     <div class="footer">
         <a href="http://www.miitbeian.gov.cn/">蜀ICP备15026623号-1</a>
         <br>
-        © 2014-2019 竹影流浪.All Rights Reserved. Powered by Curtion.
+        © 2014-2019 竹影流浪.All Rights Reserved. Powered by meu-blog.
     </div>
 </template>
 

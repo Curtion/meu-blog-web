@@ -12,6 +12,7 @@ export default {
 <style>
     body {
         margin: 0px;
+        background-color: #EEEEEE;
     }
     @media screen and (max-width:1200px) and (min-width:1024px){
         .home{

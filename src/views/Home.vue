@@ -11,9 +11,9 @@
                         <main-post-list></main-post-list>
                     </el-col>
                     <el-col :span="8">
-                        <div class="aside"></div>
+                        <aside-view></aside-view>
                     </el-col>
-                </el-row>             
+                </el-row>
             </el-main>
         </el-container>
     </div>
@@ -28,20 +28,14 @@
 import header from './components/header.vue'
 import footer from './components/footer.vue'
 import postList from './components/postlist.vue'
+import aside from './components/aside.vue'
 export default {
     name: 'home',
     components: {
         headerMeu: header,
         footerMeu:footer,
-        mainPostList:postList
+        mainPostList:postList,
+        asideView: aside
     }
 };
 </script>
-
-<style scoped>
-    .aside {
-        height: 100vh;
-        background-color: red;
-        margin-left: 5px;
-    }
-</style>

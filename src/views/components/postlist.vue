@@ -1,6 +1,6 @@
 <template>
     <div class="post-list">
-        <el-card v-for="item in list" :key="item.id" class="box-card">
+        <el-card v-for="item in list" :key="item.id" class="box-card" shadow="hover">
             <div slot="header" class="clearfix">
                 <div class="title">
                     <a v-html="item.title" :href="url(item.id)"></a>
@@ -14,26 +14,35 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 import { constants } from 'fs';
+import config from '@/config.js'
 export default {
     name: 'postlist',
     data: () => {
         return {
             list: {},
-            msg: ""
+            msg: "",
+            loading: {}
         }
     },
     created: async function() {
-        let data = (await axios.get("http://127.0.0.1/articles/lists/?limit=10&page=1")).data;
+        this.loading = this.$loading({
+            lock: true,
+            text: '数据加载中......',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.8)'
+        });
+        let data = (await axios.get(config.ajaxUrl + "articles/lists/?limit=10&page=1")).data;
         this.list = data.info.data;
         this.msg = data.msg;
     },
     methods: {
         summary: function(data) {
-            return data.replace(/[^\u4e00-\u9fa5\.，,。？“”]/g, "").substring(0, 200);
+            return data.replace(/[^\u4e00-\u9fa5\.，,。？“”]/g, "").substring(0, 150);
         },
         url: function(data) {
+            this.loading.close();
             return `/articles/lists/${data}`
         }
     }
@@ -50,9 +59,9 @@ export default {
         font-size:24px;
     }
     .title a:visited{
-        color: rgba(0, 0, 0, 0.7);
+        color: #0088CC;
         text-decoration: none;
-        font-size:24px;
+        font-size:22px;
     }
     .title a:hover {
         color:rgba(207, 49, 49, 0.8);
