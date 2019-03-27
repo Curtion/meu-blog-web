@@ -1,12 +1,30 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
-  </div>
+    <div class="app">
+        <div class="home" type="flex" justify="center">
+            <el-container>
+                <el-header>
+                    <header-meu></header-meu>
+                </el-header>
+            </el-container>
+            <router-view></router-view>
+        </div>
+        <el-container>
+            <el-footer>
+                <footer-meu></footer-meu>
+            </el-footer>
+        </el-container>
+    </div>
 </template>
 
 <script>
+import header from '@/views/components/header.vue'
+import footer from '@/views/components/footer.vue'
 export default {
-  name: "app"
+    name: "app",
+    components: {
+        headerMeu: header,
+        footerMeu: footer
+    }
 };
 </script>
 <style>
