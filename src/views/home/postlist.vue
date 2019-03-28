@@ -43,7 +43,7 @@ export default {
         },
         url: function(data) {
             this.loading.close();
-            return `/articles/lists/${data}`
+            return `/articles/${data}`
         }
     }
 }
@@ -55,7 +55,7 @@ export default {
     }
     .title a:link{
         text-decoration: none;
-        color: rgba(0, 0, 0, 0.7);
+        color: #0088CC;
         font-size:24px;
     }
     .title a:visited{
