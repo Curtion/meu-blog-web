@@ -3,7 +3,7 @@
         <el-card v-for="item in list" :key="item.id" class="box-card" shadow="hover">
             <div slot="header" class="clearfix">
                 <div class="title">
-                    <a v-html="item.title" :href="url(item.id)"></a>
+                    <a v-html="item.title" @click="url(item.id)"></a>
                 </div>
             </div>
             <div class="text item">
@@ -36,14 +36,14 @@ export default {
         let data = (await axios.get(config.ajaxUrl + "articles/lists/?limit=10&page=1")).data;
         this.list = data.info.data;
         this.msg = data.msg;
+        this.loading.close();
     },
     methods: {
         summary: function(data) {
             return data.replace(/[^\u4e00-\u9fa5\.，,。？“”]/g, "").substring(0, 150);
         },
         url: function(data) {
-            this.loading.close();
-            return `/articles/${data}`
+            this.$router.push(`/articles/${data}`)
         }
     }
 }
@@ -53,7 +53,7 @@ export default {
     .box-card {
         margin-bottom: 5px;
     }
-    .title a:link{
+    .title a{
         text-decoration: none;
         color: #0088CC;
         font-size:24px;
@@ -64,6 +64,7 @@ export default {
         font-size:22px;
     }
     .title a:hover {
+        cursor:pointer;
         color:rgba(207, 49, 49, 0.8);
         font-size:24px;
     }

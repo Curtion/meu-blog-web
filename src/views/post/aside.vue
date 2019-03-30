@@ -18,7 +18,7 @@ export default {
 <style scoped>
     .aside {
         margin-left: 5px;
-        background-color: red;
+        background-color: #ccc;
         height: 100vh;
     }
 </style>
