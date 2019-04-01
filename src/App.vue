@@ -32,7 +32,7 @@ export default {
         margin: 0px;
         background-color: #EEEEEE;
     }
-    @media screen and (max-width:1200px) and (min-width:1024px){
+    @media screen and (max-width:1300px) and (min-width:1024px){
         .home{
             width:1024px;
             margin:0 auto;
@@ -46,9 +46,9 @@ export default {
             position: relative;
         }
     }
-    @media screen and (min-width:1200px){
+    @media screen and (min-width:1300px){
         .home{
-            width:1200px;
+            width:1300px;
             margin:0 auto;
             position: relative;
         }
