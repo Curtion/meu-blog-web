@@ -8,6 +8,11 @@
             </div>
             <div class="text item">
                 <span>{{summary(item.content)}}</span>
+                <hr>
+                <div class="bottom">
+                    <div class="time">{{getDate(item.time*1000)}}</div>
+                    <div class="author">{{item.time}}</div>
+                </div>
             </div>
         </el-card>
     </div>
@@ -44,6 +49,13 @@ export default {
         },
         url: function(data) {
             this.$router.push(`/articles/${data}`)
+        },
+        getDate(timeData){
+            let d = new Date(timeData);
+            let min = d.getMinutes()>=10?d.getMinutes():'0' + d.getMinutes();
+            let sec = d.getSeconds()>=10?d.getSeconds():'0' + d.getSeconds();
+            let es = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + min + ':' + sec;
+            return es;
         }
     }
 }
@@ -67,5 +79,18 @@ export default {
         cursor:pointer;
         color:rgba(207, 49, 49, 0.8);
         font-size:24px;
+    }
+    .bottom {
+        font-size: 12px;
+        color: rgba(44, 39, 39, 0.8);
+        display: flex;
+        justify-content: space-between;
+    }
+    hr {
+        border: none;
+        border-bottom: 1px solid #DaDaDa;
+        height: 1px;
+        transform: scaleY(0.5);
+        transform-origin:0 0;
     }
 </style>
