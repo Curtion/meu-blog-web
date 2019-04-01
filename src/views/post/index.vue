@@ -6,7 +6,7 @@
                     <el-col :span="16">
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
-                                <span v-html="post.title"></span>
+                                <h1 v-html="post.title"></h1>
                             </div>
                             <span v-html="content" class="markdown-body"></span>
                         </el-card>
