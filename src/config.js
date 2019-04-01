@@ -1,3 +1,3 @@
 export default {
-    ajaxUrl: "http://127.0.0.1/"
+    ajaxUrl: "http://47.107.186.140/"
 }
