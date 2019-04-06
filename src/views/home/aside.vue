@@ -1,28 +1,16 @@
 <template>
     <div class="aside">
         <el-card class="box-card" shadow="never">
-            <el-table
-                :data="tableData"
-                border
-                style="width: 100%">
-                <el-table-column
-                prop="date"
-                label="日期"
-                width="90"
-                align="center">
-                </el-table-column>
-                <el-table-column
-                prop="schedule"
-                label="进度"
-                width="90"
-                align="center">
-                </el-table-column>
-                <el-table-column
-                prop="info"
-                label="说明"
-                align="center">
-                </el-table-column>
-            </el-table>
+            <div slot="header" class="clearfix">标签云</div>
+            <el-tag v-for="item in tags" :type="random()" class="tag">{{item}}</el-tag>
+        </el-card>
+        <el-card class="box-card" shadow="never">
+            <div slot="header" class="clearfix">友情链接</div>
+            <ul class="links">
+                <li><a href="http://mxsky.cn/" target="__blank">小天地</a></li>
+                <li><a href="https://mhcf.net" target="_blank">梦幻辰风</a></li>
+                <li><a href="https://996.icu" target="_blank">996.ICU</a></li>
+            </ul>
         </el-card>
     </div>
 </template>
@@ -31,11 +19,13 @@
 export default {
     data(){
         return{
-            tableData: [{
-                date: '03-27',
-                schedule: '完成',
-                info: '完成主界面设计'
-            }]
+            tagStyle: ['', 'success', 'info', 'warning', 'danger'],
+            tags: ['代码', '毕业设计', '生活', '硬件']
+        }
+    },
+    methods: {
+        random: function() {
+            return this.tagStyle[Math.floor(Math.random()*this.tagStyle.length)]
         }
     }
 }
@@ -57,5 +47,24 @@ export default {
 
     .box-card {
         margin-bottom: 5px;
+    }
+    .tag {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .links {
+        list-style: none;
+        padding-left: 0px;
+    }
+    .links a:active, .links a:hover{
+        color: #ccc;
+        text-decoration: underline;
+    }
+    .links a {
+        color: rgba(153, 105, 105, 0.664);
+        text-decoration: none;
+    }
+    .link li:hover {
+        background-color: rgb(230, 178, 178);
     }
 </style>
