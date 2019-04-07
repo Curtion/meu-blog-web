@@ -7,6 +7,11 @@
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
                                 <h1 v-html="post.title"></h1>
+                                <div class="title-info">
+                                    <span class="time"><i class="el-icon-date"></i> {{getDate(post.time*1000)}}</span>
+                                    <span class="author"><i class="el-icon-edit-outline"></i> {{post.name}}</span>
+                                    <span class="kind"><i class="el-icon-menu"></i> {{post.kind}}</span>
+                                </div>
                             </div>
                             <span v-html="content" class="markdown-body"></span>
                         </el-card>
@@ -126,7 +131,14 @@ export default {
             this.post = (await axios.get(config.ajaxUrl + "articles/lists/" + this.id)).data.info.data;
             this.content = marked(this.post.content.replace('<!--markdown-->', '')).replace(/<pre>/g, '<pre class="hljs">')
             this.toc = tocObj.toHTML();
-        }
+        },
+        getDate(timeData) {
+            let d = new Date(timeData);
+            let min = d.getMinutes()>=10?d.getMinutes():'0' + d.getMinutes();
+            let sec = d.getSeconds()>=10?d.getSeconds():'0' + d.getSeconds();
+            let es = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + min + ':' + sec;
+            return es;
+      },
     },
     components: {
         asideRight: aside
@@ -134,5 +146,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    .title-info {
+        display: flex;
+        justify-content: center;
+    }
+    .title-info span {
+        margin-right: 20px;
+    }
 </style>
+

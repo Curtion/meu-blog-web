@@ -1,6 +1,6 @@
 <template>
     <div class="post-list">
-        <el-card v-for="item in list" :key="item.id" class="box-card" shadow="hover">
+        <el-card v-for="item in resList" :key="item.id" class="box-card" shadow="hover">
             <div slot="header" class="clearfix">
                 <div class="title">
                     <a v-html="item.title" @click="url(item.id)"></a>
@@ -15,6 +15,15 @@
                 </div>
             </div>
         </el-card>
+        <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="totalCount"
+        :page-size="ajaxPar.limit"
+        :current-page="page"
+        @current-change="chagePage"
+        class="flex-center">
+        </el-pagination>
     </div>
 </template>
 
@@ -26,22 +35,24 @@ export default {
     name: 'postlist',
     data: () => {
         return {
-            list: {},
-            msg: "",
-            loading: {}
+            totalCount: 0,
+            count: 0,
+            page: 0,
+            resList: [],
+            loading: {},
+            ajaxPar: {
+                limit: 10,
+                page: 1
+            }
         }
     },
-    created: async function() {
-        this.loading = this.$loading({
-            lock: true,
-            text: '数据加载中......',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.8)'
+    created: function() {
+        this.getPostList(this.ajaxPar.limit, this.ajaxPar.page).then(res => {
+            this.resList = res.info.data;
+            this.totalCount = res.info.totalCount;
+            this.count = res.info.count;
+            this.page = res.info.page;
         });
-        let data = (await axios.get(config.ajaxUrl + "articles/lists/?limit=10&page=1")).data;
-        this.list = data.info.data;
-        this.msg = data.msg;
-        this.loading.close();
     },
     methods: {
         summary: function(data) {
@@ -50,12 +61,34 @@ export default {
         url: function(data) {
             this.$router.push(`/articles/${data}`)
         },
-        getDate(timeData){
+        getDate(timeData) {
             let d = new Date(timeData);
             let min = d.getMinutes()>=10?d.getMinutes():'0' + d.getMinutes();
             let sec = d.getSeconds()>=10?d.getSeconds():'0' + d.getSeconds();
             let es = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + min + ':' + sec;
             return es;
+        },
+        getPostList(limit, page) {
+            return new Promise(async (resolve, reject) => {
+                this.loading = this.$loading({
+                    lock: true,
+                    text: '数据加载中......',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.8)'
+                });
+                let res = (await axios.get(config.ajaxUrl + "articles/lists/?limit=" + limit + "&page=" + page)).data;
+                resolve(res)
+                this.loading.close();
+            })
+        },
+        chagePage(index) {
+            this.ajaxPar.page = index;
+            this.getPostList(this.ajaxPar.limit, this.ajaxPar.page).then(res => {
+                this.resList = res.info.data;
+                this.totalCount = res.info.totalCount;
+                this.count = res.info.count;
+                this.page = res.info.page;
+            });
         }
     }
 }
@@ -92,5 +125,9 @@ export default {
         height: 1px;
         transform: scaleY(0.5);
         transform-origin:0 0;
+    }
+    .flex-center {
+        display: flex;
+        justify-content: center;
     }
 </style>
