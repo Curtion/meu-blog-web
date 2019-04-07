@@ -7,6 +7,7 @@
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
                                 <h1 v-html="post.title"></h1>
+                                <hr>
                                 <div class="title-info">
                                     <span class="time"><i class="el-icon-date"></i> {{getDate(post.time*1000)}}</span>
                                     <span class="author"><i class="el-icon-edit-outline"></i> {{post.name}}</span>
@@ -153,6 +154,13 @@ export default {
     }
     .title-info span {
         margin-right: 20px;
+    }
+    hr {
+        border: none;
+        border-bottom: 1px solid #555;
+        height: 1px;
+        transform: scaleY(0.5);
+        transform-origin:0 0;
     }
 </style>
 

@@ -11,7 +11,7 @@
                 <hr>
                 <div class="bottom">
                     <div class="time">{{getDate(item.time*1000)}}</div>
-                    <div class="msgnum">评论：{{item.msgnum}}</div>
+                    <div class="msgnum">评论：{{item.msgnum}}条</div>
                 </div>
             </div>
         </el-card>
