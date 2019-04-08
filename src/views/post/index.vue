@@ -16,6 +16,9 @@
                             </div>
                             <span v-html="content" class="markdown-body"></span>
                         </el-card>
+                        <el-card class="box-card msg">
+                            <messages></messages>
+                        </el-card>
                     </el-col>
                     <el-col :span="8">
                         <aside-right
@@ -35,11 +38,12 @@ import config from '@/config.js'
 import marked from 'marked'
 import 'highlight.js/styles/darkula.css'
 import '@/assets/markdown.css'
+import messages from './components/messages/index.vue'
 const tocObj = { 
   add: function(text, level) {
-    let anchor = `toc${level}${++this.index}`;
-    this.toc.push({ anchor: anchor, level: level, text: text });
-    return anchor;
+        let anchor = `toc${level}${++this.index}`;
+        this.toc.push({ anchor: anchor, level: level, text: text });
+        return anchor;
   },
   // 使用堆栈的方式处理嵌套的ul,li，level即ul的嵌套层次，1是最外层
   // <ul>
@@ -60,33 +64,33 @@ const tocObj = {
       let levelIndex = levelStack.indexOf(item.level);
       // 没有找到相应level的ul标签，则将li放入新增的ul中
       if (levelIndex === -1) {
-        levelStack.unshift(item.level);
-        addStartUL();
-        addLI(item.anchor, item.text);
+            levelStack.unshift(item.level);
+            addStartUL();
+            addLI(item.anchor, item.text);
       } // 找到了相应level的ul标签，并且在栈顶的位置则直接将li放在此ul下
       else if (levelIndex === 0) {
-        addLI(item.anchor, item.text);
+            addLI(item.anchor, item.text);
       } // 找到了相应level的ul标签，但是不在栈顶位置，需要将之前的所有level出栈并且打上闭合标签，最后新增li
       else {
         while (levelIndex--) {
-          levelStack.shift();
-          addEndUL();
+            levelStack.shift();
+            addEndUL();
         }
         addLI(item.anchor, item.text);
       }
     });
     // 如果栈中还有level，全部出栈打上闭合标签
     while(levelStack.length) {
-      levelStack.shift();
-      addEndUL();
+        levelStack.shift();
+        addEndUL();
     }
     // 清理先前数据供下次使用
     this.toc = [];
     this.index = 0;
     return result;
   },
-  toc: [], 
-  index: 0
+    toc: [], 
+    index: 0
 };
 let markRenderer = new marked.Renderer()
 markRenderer.heading = (text, level) => {
@@ -94,17 +98,17 @@ markRenderer.heading = (text, level) => {
     return `<a id=${anchor} class="anchor-fix"></a><h${level}>${text}</h${level}>\n`;
 }
 marked.setOptions({
-  renderer: markRenderer,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  highlight: function (code) {
-    return require('highlight.js').highlightAuto(code).value;
-  }
+    renderer: markRenderer,
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+    highlight: function (code) {
+        return require('highlight.js').highlightAuto(code).value;
+    }
 });
 export default {
     name: 'post',
@@ -142,7 +146,8 @@ export default {
       },
     },
     components: {
-        asideRight: aside
+        asideRight: aside,
+        messages: messages
     }
 }
 </script>
@@ -161,6 +166,9 @@ export default {
         height: 1px;
         transform: scaleY(0.5);
         transform-origin:0 0;
+    }
+    .msg {
+        margin-top: 5px;
     }
 </style>
 
