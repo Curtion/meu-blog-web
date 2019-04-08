@@ -125,13 +125,13 @@ export default {
             background: 'rgba(0, 0, 0, 0.8)'
         });
         this.ajax();
-        this.loading.close();
     },
     methods:{
         ajax: async function() {
             this.post = (await axios.get(config.ajaxUrl + "articles/lists/" + this.id)).data.info.data;
             this.content = marked(this.post.content.replace('<!--markdown-->', '')).replace(/<pre>/g, '<pre class="hljs">')
             this.toc = tocObj.toHTML();
+            this.loading.close();
         },
         getDate(timeData) {
             let d = new Date(timeData);
