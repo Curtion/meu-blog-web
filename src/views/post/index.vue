@@ -19,6 +19,8 @@
                         <el-card class="box-card msg">
                             <messages
                             :postInfo="post"></messages>
+                            <msg-list
+                            :postInfo="post"></msg-list>
                         </el-card>
                     </el-col>
                     <el-col :span="8">
@@ -40,6 +42,7 @@ import marked from 'marked'
 import 'highlight.js/styles/darkula.css'
 import '@/assets/markdown.css'
 import messages from './components/messages/index.vue'
+import msgList from './components/msglist/index.vue'
 import tocObj from './js/marked.toc.js'
 let markRenderer = new marked.Renderer()
 markRenderer.heading = (text, level) => {
@@ -96,7 +99,8 @@ export default {
     },
     components: {
         asideRight: aside,
-        messages: messages
+        messages: messages,
+        msgList: msgList
     }
 }
 </script>
