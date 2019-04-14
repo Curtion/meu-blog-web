@@ -29,7 +29,6 @@
 
 <script>
 import axios from "axios";
-import { constants } from 'fs';
 import config from '@/config.js'
 export default {
     name: 'postlist',
@@ -61,14 +60,14 @@ export default {
         url: function(data) {
             this.$router.push(`/articles/${data}`)
         },
-        getDate(timeData) {
+        getDate: function(timeData) {
             let d = new Date(timeData);
             let min = d.getMinutes()>=10?d.getMinutes():'0' + d.getMinutes();
             let sec = d.getSeconds()>=10?d.getSeconds():'0' + d.getSeconds();
             let es = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + min + ':' + sec;
             return es;
         },
-        getPostList(limit, page) {
+        getPostList: function(limit, page) {
             return new Promise(async (resolve, reject) => {
                 this.loading = this.$loading({
                     lock: true,
@@ -81,7 +80,7 @@ export default {
                 this.loading.close();
             })
         },
-        chagePage(index) {
+        chagePage: function(index) {
             this.ajaxPar.page = index;
             this.getPostList(this.ajaxPar.limit, this.ajaxPar.page).then(res => {
                 this.resList = res.info.data;
