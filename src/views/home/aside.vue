@@ -2,7 +2,7 @@
     <div class="aside">
         <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">标签云</div>
-            <el-tag v-for="item in tags" :type="random()" class="tag">{{item}}</el-tag>
+            <el-tag v-for="(item, index) in tags" :type="random()" :key="index" class="tag">{{item}}</el-tag>
         </el-card>
         <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">友情链接</div>
