@@ -1,5 +1,5 @@
 <template>
-    <div class="app">
+    <div id="app" v-if="main">
         <div class="home" type="flex" justify="center">
             <el-container>
                 <el-header>
@@ -24,7 +24,17 @@ export default {
     components: {
         headerMeu: header,
         footerMeu: footer
-    }
+    },
+    data() {
+        return {
+            main: true
+        }
+    },
+    created() {
+        if(this.$route.path === '/admin'){
+            this.main = false;
+        }
+    },
 };
 </script>
 <style>
