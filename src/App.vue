@@ -31,7 +31,7 @@ export default {
         }
     },
     created() {
-        if(this.$route.path === '/admin'){
+        if(this.$route.path.indexOf('admin') !== -1){
             this.main = false;
         }
     },
