@@ -1,7 +1,7 @@
 <template>
     <div class="msg">
         <div style="margin:5px 0;;width: 100%;height: 0;border: 1px solid #eee;"></div>
-        <el-card style="margin-bottom: 10px;" shadow="hover" v-for="item in msglist" :key="item.id">
+        <el-card class="msgList" shadow="hover" v-for="item in msglist" :key="item.id">
             <div slot="header" class="msgtitle">
                 <span class="name">称呼：{{item.name}}</span>
                 <span class="time">时间：{{item.time}}</span>
@@ -45,5 +45,9 @@ export default {
 .msgtitle {
     display: flex;
     justify-content: space-between;
+}
+.msgList {
+    margin-bottom: 10px;
+    background-color: #f7f7f7;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div id="post">
+    <div id="post" v-if="show">
         <el-container>
             <el-main>
                 <el-row>
@@ -70,7 +70,8 @@ export default {
             post: {},
             content: '',
             loading: {},
-            toc: ''
+            toc: '',
+            show: false
         }
     },
     created: function() {
@@ -96,6 +97,13 @@ export default {
             let es = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + min + ':' + sec;
             return es;
       },
+    },
+    watch: {
+        post: function (value) {
+            if(value.id !== undefined){
+                this.show = true;
+            }
+        }
     },
     components: {
         asideRight: aside,
