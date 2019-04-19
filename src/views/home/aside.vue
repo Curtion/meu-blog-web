@@ -2,7 +2,7 @@
     <div class="aside">
         <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">标签云</div>
-            <el-tag v-for="(item, index) in tags" :type="random()" :key="index" class="tag">{{item}}</el-tag>
+            <tags/>
         </el-card>
         <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">友情链接</div>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import tags from './components/tags.vue'
 export default {
     data(){
         return{
@@ -27,6 +28,9 @@ export default {
         random: function() {
             return this.tagStyle[Math.floor(Math.random()*this.tagStyle.length)]
         }
+    },
+    components: {
+        tags
     }
 }
 </script>

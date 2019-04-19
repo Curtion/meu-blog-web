@@ -15,7 +15,6 @@ export default {
     name: 'tags',
     data() {
         return {
-            loading: {},
             tags: [],
             tagStyle: ['danger', 'primary', 'success', 'info', 'warning'],
         }
@@ -32,24 +31,9 @@ export default {
         }
     },
     created() {
-        this.loading = this.$loading({
-            lock: true,
-            text: '数据加载中......',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.8)'
-        });
         this.getTags().then(res => {
             this.tags = res.info.data
-            this.loading.close();
         })
     }
 }
 </script>
-<style scoped>
-.tag {
-    padding: 0 20px;
-}
-.itemTags {
-    margin: 10px;
-}
-</style>
