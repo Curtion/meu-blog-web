@@ -4,6 +4,7 @@ import Home from './views/home/index.vue'
 import Post from './views/post/index.vue'
 import Archive from './views/archive/index.vue'
 import Tag from './views/tags/index.vue'
+import Login from './views/login/index.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
             path: '/tags',
             name: 'tag',
             component: Tag
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
         }
     ]
 })

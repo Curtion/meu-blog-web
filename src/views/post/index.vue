@@ -17,10 +17,8 @@
                             <span v-html="content" class="markdown-body"></span>
                         </el-card>
                         <el-card class="box-card msg">
-                            <messages
-                            :postInfo="post"></messages>
-                            <msg-list
-                            :postInfo="post"></msg-list>
+                            <messages></messages>
+                            <msg-list></msg-list>
                         </el-card>
                     </el-col>
                     <el-col :span="8">

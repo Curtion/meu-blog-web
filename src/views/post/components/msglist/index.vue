@@ -1,5 +1,5 @@
 <template>
-    <div class="msg">
+    <div class="msg" v-loading="loading">
         <div style="margin:5px 0;;width: 100%;height: 0;border: 1px solid #eee;"></div>
         <el-card class="msgList" shadow="hover" v-for="item in msglist" :key="item.id">
             <div slot="header" class="msgtitle">
@@ -14,26 +14,25 @@
 import axios from 'axios'
 import config from '@/config.js'
 export default {
-    props: ['postInfo'],
     data() {
         return {
-            msglist: ''
+            msglist: '',
+            loading: true
         }
     },
     methods: {
         getMsg: function(id) {
             axios.get(config.ajaxUrl + 'comments/lists/' + id).then((res) => {
                 this.msglist = res.data.info.data;
+                this.loading = false;
             })
         }
     },
-    watch: {
-        postInfo: function(value) {
-            if(value !== undefined) {
-                this.getMsg(this.postInfo.id)
-            }
+    created() {
+        if(this.$route.params.id !== undefined){
+            this.getMsg(this.$route.params.id);
         }
-    }
+    },
 }
 </script>
 

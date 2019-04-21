@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Admin from '../views/admin/index.vue'
-import Des from '../views/admin/des.vue'
-
+import Write from '../views/admin/write.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -15,16 +14,11 @@ export default new Router({
             component: Admin,
             children: [
                 {
-                    path: 'index',
-                    name: 'Admin-index',
-                    component: Des
-                },
-                {
                     path: 'write',
-                    name: 'articleWrite',
-                    component: Des
-                }
+                    name: 'Admin-write',
+                    component: Write
+                },
             ]
-        },
+        }
     ]
 })
