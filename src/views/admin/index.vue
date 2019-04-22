@@ -44,6 +44,9 @@ export default {
     if(user === null) {
       window.location.href = '/login'
     }
+    if(this.$route.path === '/admin' || this.$route.path === '/admin/') {
+      this.$router.push('/admin/write')
+    }
   },
 }
 </script>
