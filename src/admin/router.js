@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Admin from '../views/admin/index.vue'
 import Write from '../views/admin/write/index.vue'
 import Tags from '../views/admin/tags/index.vue'
+import Kinds from '../views/admin/kinds/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +24,11 @@ export default new Router({
                     path: 'tags',
                     name: 'Admin-tags',
                     component: Tags
+                },
+                {
+                    path: 'kinds',
+                    name: 'Admin-kinds',
+                    component: Kinds
                 }
             ]
         }
