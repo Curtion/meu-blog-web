@@ -23,7 +23,9 @@ export default {
     methods: {
         getMsg: function(id) {
             axios.get(config.ajaxUrl + 'comments/lists/' + id).then((res) => {
-                this.msglist = res.data.info.data;
+                if(res.data.info !== undefined) {
+                    this.msglist = res.data.info.data;
+                }
                 this.loading = false;
             })
         }

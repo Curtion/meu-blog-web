@@ -17,7 +17,7 @@
                             <span v-html="content" class="markdown-body"></span>
                         </el-card>
                         <el-card class="box-card msg">
-                            <messages></messages>
+                            <messages v-bind:post-info="post"></messages>
                             <msg-list></msg-list>
                         </el-card>
                     </el-col>
