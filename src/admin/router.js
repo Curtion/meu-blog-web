@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Admin from '../views/admin/index.vue'
-import Write from '../views/admin/write.vue'
+import Write from '../views/admin/write/index.vue'
+import Tags from '../views/admin/tags/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +19,11 @@ export default new Router({
                     name: 'Admin-write',
                     component: Write
                 },
+                {
+                    path: 'tags',
+                    name: 'Admin-tags',
+                    component: Tags
+                }
             ]
         }
     ]

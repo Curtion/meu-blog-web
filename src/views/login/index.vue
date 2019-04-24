@@ -49,8 +49,8 @@ export default {
                             message: res.msg,
                             type: 'success'
                         })
-                        localStorage.setItem('user', res.user)
-                        localStorage.setItem('token', res.token)
+                        localStorage.setItem('user', res.info.user)
+                        localStorage.setItem('token', res.info.token)
                         window.location.href = '/admin/write'
                     }
                 })
