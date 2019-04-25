@@ -24,7 +24,7 @@
             <i class="el-icon-tickets"></i>
             <span slot="title">标签管理</span>
           </el-menu-item>
-          <el-menu-item index="kindAdmin" :route="{path: '/admin/kinds'}">
+          <el-menu-item index="kinds" :route="{path: '/admin/kinds'}">
             <i class="el-icon-menu"></i>
             <span slot="title">分类管理</span>
           </el-menu-item>

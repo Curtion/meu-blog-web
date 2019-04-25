@@ -11,9 +11,14 @@
             label="ID">
             </el-table-column>
             <el-table-column
+            prop="parent"
+            align="center"
+            label="父级分类">
+            </el-table-column>
+            <el-table-column
             prop="name"
             align="center"
-            label="标签名称">
+            label="分类名称">
             </el-table-column>
             <el-table-column
             prop="count"
@@ -100,7 +105,7 @@ export default {
             type: 'warning'
         }).then(() => {
             axios({
-                url: config.ajaxUrl + 'tags/delete/?id=' + row.id,
+                url: config.ajaxUrl + 'kinds/delete/?id=' + row.id,
                 method: 'delete',
                 headers: {'authorization': localStorage.getItem('token')},
             }).then(res => {
