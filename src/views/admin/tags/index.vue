@@ -4,6 +4,7 @@
             <el-table
             border
             :data="tagLists"
+            v-loading="loading"
             style="width: 100%">
             <el-table-column
             prop="id"
@@ -46,7 +47,8 @@ import dayjs from 'dayjs'
 export default {
   data() {
     return {
-        tagLists: []
+        tagLists: [],
+        loading: true
     }
   },
   methods: {
@@ -64,6 +66,7 @@ export default {
             }
         })
         this.tagLists = data
+        this.loading = false
     },
     add: function() {
         this.$prompt('请输入标签名称', '添加标签', {
