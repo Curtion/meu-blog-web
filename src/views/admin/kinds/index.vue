@@ -3,18 +3,13 @@
         <el-button type="success" style="margin-bottom: 10px;" @click="add">添加分类</el-button>
             <el-table
             border
-            :data="tagLists"
+            :data="kindLists"
             v-loading="loading"
             style="width: 100%">
             <el-table-column
             prop="id"
             align="center"
             label="ID">
-            </el-table-column>
-            <el-table-column
-            prop="parent"
-            align="center"
-            label="父级分类">
             </el-table-column>
             <el-table-column
             prop="name"
@@ -52,7 +47,7 @@ import dayjs from 'dayjs'
 export default {
   data() {
     return {
-        tagLists: [],
+        kindLists: [],
         loading: true
     }
   },
@@ -70,11 +65,11 @@ export default {
                 return 1
             }
         })
-        this.tagLists = data
+        this.kindLists = data
         this.loading = false
     },
     add: function() {
-        this.$prompt('请输入标签名称', '添加标签', {
+        this.$prompt('请输入分类名称', '添加分类', {
             confirmButtonText: '添加',
             cancelButtonText: '取消',
             inputPattern: /^[\s\S]*.*[^\s][\s\S]*$/,
@@ -84,7 +79,8 @@ export default {
                 url: config.ajaxUrl + 'kinds/add/',
                 method: 'post',
                 data: {
-                    name: value
+                    name: value,
+                    parent: 0
                 },
                 headers: {'authorization': localStorage.getItem('token')},
             }).then(res => {

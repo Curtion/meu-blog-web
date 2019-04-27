@@ -4,6 +4,7 @@ import Admin from '../views/admin/index.vue'
 import Write from '../views/admin/write/index.vue'
 import Tags from '../views/admin/tags/index.vue'
 import Kinds from '../views/admin/kinds/index.vue'
+import Comments from '../views/admin/comments/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -19,6 +20,11 @@ export default new Router({
                     path: 'write',
                     name: 'Admin-write',
                     component: Write
+                },
+                {
+                    path: 'comments',
+                    name: 'Admin-comments',
+                    component: Comments
                 },
                 {
                     path: 'tags',

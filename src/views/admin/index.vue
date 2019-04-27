@@ -16,7 +16,7 @@
             <i class="el-icon-document"></i>
             <span slot="title">文章管理</span>
           </el-menu-item>
-          <el-menu-item index="messageAdmin" :route="{path: '/admin/messageAdmin'}">
+          <el-menu-item index="comments" :route="{path: '/admin/comments'}">
             <i class="el-icon-message"></i>
             <span slot="title">留言管理</span>
           </el-menu-item>

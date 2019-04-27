@@ -4,33 +4,33 @@
             <div class="center">
                 <el-form label-width="40px">
                     <el-form-item label="标题">
-                        <el-input placeholder="请输入文章标题"></el-input>
+                        <el-input placeholder="请输入文章标题" v-model="Form.title"></el-input>
                     </el-form-item>
                     <el-form-item label="正文">
                         <mark-down @on-save="save" theme="GitHub"/>
                     </el-form-item>
                     <el-form-item class="inline" label="分类">
-                        <el-select v-model="value" multiple placeholder="请选择文章分类">
+                        <el-select v-model="Form.kind" placeholder="请选择文章分类">
                             <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in kindLists"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item class="inline ml" label="标签">
-                        <el-select v-model="value" multiple placeholder="请选择文章标签">
+                        <el-select v-model="Form.tag" multiple style="width: 400px;" placeholder="请选择文章标签">
                             <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in tagLists"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary">立即发布</el-button>
+                        <el-button type="primary" @click="add()">立即发布</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -40,28 +40,81 @@
 
 <script>
 import MarkDown from 'vue-meditor'
+import axios from 'axios'
+import config from '@/config.js'
+import dayjs from 'dayjs'
 export default {
     components: {
         MarkDown
     },
     data() {
         return {
-            options: [
-                {
-                    value: '选项1',
-                    label: '黄金糕'
-                },
-                {
-                    value: '选项2',
-                    label: '黄金糕s'
-                }
-            ],
-            value: ''
+            kindLists: [],
+            tagLists: [],
+            Form: {
+                title: '',
+                content: '',
+                kind: '',
+                tag: []
+            }
         }
     },  
     methods: {
         save: function(value) {
+            this.Form.content = value.markdownValue
+        },
+        getKinds: async function() {
+            let data = (await axios.get(config.ajaxUrl + "kinds/lists/")).data.info.data;
+            data.forEach((element, index) => {
+                data[index].time = dayjs(data[index].time*1000).format('YYYY年MM月DD日 HH:mm:ss')
+            });
+            data.sort((x, y) => { //对结果排序
+                if(x.id < y.id) {
+                    return -1
+                }
+                if(x.id > y.id) {
+                    return 1
+                }
+            })
+            this.kindLists = data
+        },
+        getTags: async function() {
+            let data = (await axios.get(config.ajaxUrl + "tags/lists/")).data.info.data;
+            data.forEach((element, index) => {
+                data[index].time = dayjs(data[index].time*1000).format('YYYY年MM月DD日 HH:mm:ss')
+            });
+            data.sort((x, y) => { //对结果排序
+                if(x.id < y.id) {
+                    return -1
+                }
+                if(x.id > y.id) {
+                    return 1
+                }
+            })
+            this.tagLists = data
+        },
+        add: function() {
+            axios({
+                url: config.ajaxUrl + 'articles/add/',
+                method: 'post',
+                data: {
+                    title: this.Form.title,
+                    content: this.Form.content,
+                    tag: this.Form.tag,
+                    kind: this.Form.kind
+                },
+                headers: {'authorization': localStorage.getItem('token')},
+            }).then(res => {
+                this.$message({
+                    type: 'success',
+                    message: res.data.msg
+                });
+            })
         }
+    },
+    created() {
+        this.getKinds()
+        this.getTags()
     },
 }
 </script>
