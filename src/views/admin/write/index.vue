@@ -100,11 +100,15 @@ export default {
                 data: {
                     title: this.Form.title,
                     content: this.Form.content,
-                    tag: this.Form.tag,
+                    tag: this.Form.tag.join(),
                     kind: this.Form.kind
                 },
                 headers: {'authorization': localStorage.getItem('token')},
             }).then(res => {
+                this.Form.title = ''
+                this.Form.content = ''
+                this.Form.kind = ''
+                this.Form.tag = []
                 this.$message({
                     type: 'success',
                     message: res.data.msg
