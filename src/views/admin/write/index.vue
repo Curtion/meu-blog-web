@@ -7,7 +7,7 @@
                         <el-input placeholder="请输入文章标题" v-model="Form.title"></el-input>
                     </el-form-item>
                     <el-form-item label="正文">
-                        <mark-down @on-save="save" theme="GitHub"/>
+                        <mark-down @on-save="save" :interval="5000" theme="GitHub"/>
                     </el-form-item>
                     <el-form-item class="inline" label="分类">
                         <el-select v-model="Form.kind" placeholder="请选择文章分类">
