@@ -57,7 +57,11 @@ export default {
         getPostList: function(limit, page) {
             return new Promise(async (resolve, reject) => {
                 let res = (await axios.get(config.ajaxUrl + "articles/lists/?limit=" + limit + "&page=" + page)).data;
-                resolve(res)
+                let data = res.info.data
+                data.forEach((element, index) => {
+                    data[index].time = dayjs(data[index].time*1000).format('YYYY年MM月DD日 HH:mm:ss')
+                });
+                this.tableData = data
                 this.loading = false
             })
         },
@@ -65,17 +69,32 @@ export default {
             console.log(index, row)
         },
         handleDelete: function(index, row) {
-            console.log(index, row)
+            this.$confirm('此操作将永久删除该文章', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                axios({
+                    url: config.ajaxUrl + 'articles/delete/?id=' + row.id,
+                    method: 'delete',
+                    headers: {'authorization': localStorage.getItem('token')},
+                }).then(res => {
+                    this.getPostList(10000, 1)
+                    this.$message({
+                        type: 'success',
+                        message: res.data.msg
+                    });
+                })
+            }).catch((res) => {
+                this.$message({
+                    type: 'info',
+                    message: res
+                });          
+            });
         }
     },
     created() {
-        this.getPostList(10000, 1).then(res => {
-            let data = res.info.data
-            data.forEach((element, index) => {
-                data[index].time = dayjs(data[index].time*1000).format('YYYY年MM月DD日 HH:mm:ss')
-            });
-            this.tableData = data
-        })
+        this.getPostList(10000, 1)
     }
 }
 </script>
