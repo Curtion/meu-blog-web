@@ -12,7 +12,7 @@
             <i class="el-icon-edit-outline"></i>
             <span slot="title">撰写文章</span>
           </el-menu-item>
-          <el-menu-item index="articleAdmin" :route="{path: '/admin/articleAdmin'}">
+          <el-menu-item index="articles" :route="{path: '/admin/articles'}">
             <i class="el-icon-document"></i>
             <span slot="title">文章管理</span>
           </el-menu-item>

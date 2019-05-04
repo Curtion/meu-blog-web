@@ -3,7 +3,7 @@
         <el-card shadow="never" v-for="(item, index) in data" :key="index">
             <div class="box">
                 <div class="left">
-                    <span>{{item.name}}发表至：<a :href="'/articles/' + item.cid" target="__blank">{{item.title}}</a></span>
+                    <span>{{item.name}}发表至：<a :href="'/articles/' + item.cid" target="__blank" v-html="item.title"></a></span>
                     <span>{{item.time}}</span>
                     <span class="post">{{item.post}}</span>
                 </div>
