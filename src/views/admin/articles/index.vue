@@ -97,6 +97,7 @@ export default {
             loading: true,
             tableData: [],
             Form: {
+                id: '',
                 title: '',
                 content: '',
                 kind: '',
@@ -117,6 +118,7 @@ export default {
                 url: config.ajaxUrl + 'articles/updata/',
                 method: 'put',
                 data: {
+                    id: this.Form.id,
                     title: this.Form.title,
                     content: this.Form.content,
                     tag: this.Form.tag.join(),
@@ -124,6 +126,7 @@ export default {
                 },
                 headers: {'authorization': localStorage.getItem('token')},
             }).then(res => {
+                this.Form.id = ''
                 this.Form.title = ''
                 this.Form.content = ''
                 this.Form.kind = ''
@@ -147,6 +150,7 @@ export default {
         },
         handleEdit: async function(index, row) {
             let res = (await axios.get(config.ajaxUrl + "articles/lists/" + row.id)).data.info.data
+            this.Form.id = row.id
             this.Form.title = res.title
             this.Form.content = res.content
             this.Form.kind = res.kind
@@ -216,6 +220,7 @@ export default {
             this.tagLists = data
         },
         changeView: function () {
+            this.getPostList(10000, 1)
             this.editView = false
             this.listView = true
         }
