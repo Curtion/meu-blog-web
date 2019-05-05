@@ -33,6 +33,7 @@
                             </el-form-item>
                             <el-form-item>
                                 <el-button type="primary" @click="put()">立即修改</el-button>
+                                <el-button type="success" @click="changeView()">返回文章列表</el-button>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -110,6 +111,28 @@ export default {
     methods: {
         change: function(val) {
             // console.log(val) // 数组，包含了选中的行
+        },
+        put: function () {
+            axios({
+                url: config.ajaxUrl + 'articles/updata/',
+                method: 'put',
+                data: {
+                    title: this.Form.title,
+                    content: this.Form.content,
+                    tag: this.Form.tag.join(),
+                    kind: this.Form.kind
+                },
+                headers: {'authorization': localStorage.getItem('token')},
+            }).then(res => {
+                this.Form.title = ''
+                this.Form.content = ''
+                this.Form.kind = ''
+                this.Form.tag = []
+                this.$message({
+                    type: 'success',
+                    message: res.data.msg
+                });
+            })
         },
         getPostList: function(limit, page) {
             return new Promise(async (resolve, reject) => {
@@ -191,6 +214,10 @@ export default {
                 }
             })
             this.tagLists = data
+        },
+        changeView: function () {
+            this.editView = false
+            this.listView = true
         }
     },
     created() {

@@ -17,11 +17,6 @@
             label="标签名称">
             </el-table-column>
             <el-table-column
-            prop="count"
-            align="center"
-            label="文章数量">
-            </el-table-column>
-            <el-table-column
             prop="time"
             align="center"
             label="创建时间">
