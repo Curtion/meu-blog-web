@@ -18,6 +18,16 @@
                 </el-submenu>
             </el-submenu>
         </el-menu>
+        <div class="box">
+            <el-form :inline="true">
+                <el-form-item>
+                    <el-input v-model="secBody" placeholder="请输入内容"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="secOk">搜索</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
 </template>
 <script>
@@ -26,7 +36,20 @@ export default {
     data:() => {
         return {
             webSiteName: "竹影流浪",
-            index: '1'
+            index: '1',
+            secBody: ''
+        }
+    },
+    methods: {
+        secOk: function () {
+            if (this.secBody === '') {
+                this.$message({
+                    message: '搜索内容不能为空',
+                    type: 'error'
+                })
+                return
+            }
+            console.log(this.secBody)
         }
     },
     created: function() {
@@ -47,3 +70,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.header-meu {
+    position: relative;
+}
+.box {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+</style>
