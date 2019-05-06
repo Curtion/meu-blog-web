@@ -20,13 +20,6 @@ import tags from './components/tags.vue'
 export default {
     data(){
         return{
-            tagStyle: ['', 'success', 'info', 'warning', 'danger'],
-            tags: ['代码', '毕业设计', '生活', '硬件']
-        }
-    },
-    methods: {
-        random: function() {
-            return this.tagStyle[Math.floor(Math.random()*this.tagStyle.length)]
         }
     },
     components: {
