@@ -42,10 +42,6 @@ export default new Router({
             name: '404',
             path: '/404',
             component: NotFound
-          },
-          {
-            path: '*',    // 此处需特别注意至于最底部
-            redirect: '/404'
-          }
+        }
     ]
 })
