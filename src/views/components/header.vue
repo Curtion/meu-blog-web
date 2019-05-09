@@ -49,7 +49,6 @@ export default {
                 })
                 return
             }
-            console.log(this.secBody)
         }
     },
     created: function() {
