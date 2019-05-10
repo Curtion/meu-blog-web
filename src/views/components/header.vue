@@ -36,8 +36,7 @@ export default {
     data:() => {
         return {
             webSiteName: "竹影流浪",
-            index: '1',
-            secBody: ''
+            index: '1'
         }
     },
     methods: {
@@ -52,9 +51,19 @@ export default {
             this.$router.push({
                 path: '/search',
                 query: {
-                    content: this.secBody
+                    content: this.$store.state.secBody
                 }
             })
+        },
+    },
+    computed: {
+        secBody: {
+            get() {
+                return this.$store.state.secBody
+            },
+            set(v) {
+                this.$store.commit('setSearchContent', v)
+            }
         }
     },
     created: function() {

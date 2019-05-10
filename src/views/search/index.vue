@@ -35,10 +35,8 @@ export default {
     },
     created: function() {
         let content = this.$route.query.content
-        this.getPostList(content).then(res => {
-            console.log(res)
-            this.resList = res.info.data;
-        });
+        this.$store.commit('setSearchContent', content)
+        this.getPostList(this.$store.state.secBody)
     },
     methods: {
         summary: function(data) {
@@ -63,14 +61,28 @@ export default {
                     background: 'rgba(0, 0, 0, 0.8)'
                 });
                 let res = (await axios.get(config.ajaxUrl + "articles/search/?content=" + content)).data;
-                resolve(res)
+                if (res.status == 0) {
+                    this.resList = res.info.data;
+                }
+                resolve()
                 this.loading.close();
             })
         }
     },
-    // beforeRouteLeave (to, from , next) {
-    //     this.
-    // }
+    computed: {
+        getSearch () {
+            return this.$route.query.content
+        }
+    },
+    watch: {
+        getSearch () {
+            this.getPostList(this.$route.query.content)
+        }
+    },
+    beforeRouteLeave (to, from , next) {
+        this.$store.commit('setSearchContent', '')
+        next()
+    }
 }
 </script>
 
