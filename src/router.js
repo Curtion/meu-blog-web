@@ -5,7 +5,7 @@ import Post from './views/post/index.vue'
 import Archive from './views/archive/index.vue'
 import Tag from './views/tags/index.vue'
 import Login from './views/login/index.vue'
-import NotFound from './views/404.vue'
+import Search from './views/search/index.vue'
 
 Vue.use(Router)
 
@@ -39,9 +39,9 @@ export default new Router({
             component: Login
         },
         {
-            name: '404',
-            path: '/404',
-            component: NotFound
+            name: 'search',
+            path: '/search',
+            component: Search
         }
     ]
 })

@@ -49,6 +49,12 @@ export default {
                 })
                 return
             }
+            this.$router.push({
+                path: '/search',
+                query: {
+                    content: this.secBody
+                }
+            })
         }
     },
     created: function() {
