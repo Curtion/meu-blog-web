@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import index from '../views/admin/index.vue'
+import write from '../views/admin/write/index.vue'
 import articles from '../views/admin/articles/index.vue'
 import comments from '../views/admin/comments/index.vue'
 import tags from '../views/admin/tags/index.vue'
@@ -13,7 +15,7 @@ export default new Router({
         {
             path: '/admin',
             name: 'Admin',
-            component: () => import('../views/admin/index.vue'),
+            component: index,
             children: [
                 {
                     path: 'write',
