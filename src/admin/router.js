@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Admin from '../views/admin/index.vue'
-import Write from '../views/admin/write/index.vue'
-import Tags from '../views/admin/tags/index.vue'
-import Kinds from '../views/admin/kinds/index.vue'
-import Comments from '../views/admin/comments/index.vue'
-import Articles from '../views/admin/articles/index.vue'
+import articles from '../views/admin/articles/index.vue'
+import comments from '../views/admin/comments/index.vue'
+import tags from '../views/admin/tags/index.vue'
+import kinds from '../views/admin/kinds/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -15,32 +13,32 @@ export default new Router({
         {
             path: '/admin',
             name: 'Admin',
-            component: Admin,
+            component: () => import('../views/admin/index.vue'),
             children: [
                 {
                     path: 'write',
                     name: 'Admin-write',
-                    component: Write
+                    component: write
                 },
                 {
                     path: 'articles',
                     name: 'Admin-articles',
-                    component: Articles
+                    component: articles
                 },
                 {
                     path: 'comments',
                     name: 'Admin-comments',
-                    component: Comments
+                    component: comments
                 },
                 {
                     path: 'tags',
                     name: 'Admin-tags',
-                    component: Tags
+                    component: tags
                 },
                 {
                     path: 'kinds',
                     name: 'Admin-kinds',
-                    component: Kinds
+                    component: kinds
                 }
             ]
         }
