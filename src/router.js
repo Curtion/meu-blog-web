@@ -6,6 +6,7 @@ import Archive from './views/archive/index.vue'
 import Tag from './views/tags/index.vue'
 import Login from './views/login/index.vue'
 import Search from './views/search/index.vue'
+import About from './views/about/index.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
             name: 'search',
             path: '/search',
             component: Search
+        },
+        {
+            name: 'about-me',
+            path: '/about-me',
+            component: About
         }
     ]
 })
