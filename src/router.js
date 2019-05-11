@@ -1,12 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/home/index.vue'
-import Post from './views/post/index.vue'
-import Archive from './views/archive/index.vue'
-import Tag from './views/tags/index.vue'
-import Login from './views/login/index.vue'
-import Search from './views/search/index.vue'
-import About from './views/about/index.vue'
 
 Vue.use(Router)
 
@@ -17,37 +10,37 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: () => import('./views/home/index.vue')
         },
         {
             path: '/articles/:id',
             name: 'post',
-            component: Post
+            component: () => import('./views/post/index.vue')
         },
         {
             path: '/archive',
             name: 'archive',
-            component: Archive 
+            component: () => import('./views/archive/index.vue')
         },
         {
             path: '/tags',
             name: 'tag',
-            component: Tag
+            component: () => import('./views/tags/index.vue')
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: () => import('./views/login/index.vue')
         },
         {
             name: 'search',
             path: '/search',
-            component: Search
+            component: () => import('./views/search/index.vue')
         },
         {
             name: 'about-me',
             path: '/about-me',
-            component: About
+            component: () => import('./views/about/index.vue')
         }
     ]
 })
