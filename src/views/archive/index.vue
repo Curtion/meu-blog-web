@@ -3,40 +3,42 @@
     <el-container>
         <el-main>
             <el-row>
-                <div class="box">
-                    <el-timeline class="archive">
-                        <el-timeline-item
-                        v-for="(activity, index) in blogList"
-                        :key="index"
-                        :type="type[index].type"
-                        >
-                        <span class="list">
-                            <span 
-                            class="archiveClick"
-                            @click="showList(index)">
-                                {{blogList[index].year + '-' + blogList[index].month + ' (' + blogList[index].list.length + ')'}}
+                <el-card class="box-card">
+                    <div class="box">
+                        <el-timeline class="archive">
+                            <el-timeline-item
+                            v-for="(activity, index) in blogList"
+                            :key="index"
+                            :type="type[index].type"
+                            >
+                            <span class="list">
+                                <span 
+                                class="archiveClick"
+                                @click="showList(index)">
+                                    {{blogList[index].year + '-' + blogList[index].month + ' (' + blogList[index].list.length + ')'}}
+                                </span>
+                                <el-timeline class="archiveList archive">
+                                    <transition-group name="bloglist">
+                                        <template>
+                                            <el-timeline-item
+                                                v-for="(activityList, indexlist) in blogList[index].list"
+                                                :key="indexlist"
+                                                v-show="show[index].show"
+                                                >
+                                                <span 
+                                                class="archiveClickList" 
+                                                v-html="activityList.title"
+                                                @click="getpost(activityList.id)">
+                                                </span>
+                                            </el-timeline-item>
+                                        </template>
+                                    </transition-group>
+                                </el-timeline>
                             </span>
-                            <el-timeline class="archiveList archive">
-                                <transition-group name="bloglist">
-                                    <template>
-                                        <el-timeline-item
-                                            v-for="(activityList, indexlist) in blogList[index].list"
-                                            :key="indexlist"
-                                            v-show="show[index].show"
-                                            >
-                                            <span 
-                                            class="archiveClickList" 
-                                            v-html="activityList.title"
-                                            @click="getpost(activityList.id)">
-                                            </span>
-                                        </el-timeline-item>
-                                    </template>
-                                </transition-group>
-                            </el-timeline>
-                        </span>
-                        </el-timeline-item>
-                    </el-timeline>
-                </div>
+                            </el-timeline-item>
+                        </el-timeline>
+                    </div>
+                </el-card>
             </el-row>
         </el-main>
     </el-container>
@@ -119,5 +121,8 @@ export default {
 }
 .bloglist-enter, .bloglist-leave-to {
     opacity: 0;
-}	
+}
+.box-card {
+    opacity: 0.5;
+}
 </style>

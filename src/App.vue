@@ -27,20 +27,24 @@ export default {
     },
     data() {
         return {
-            main: true
+            main: true,
+            imgsrc: 'bg1.jpg'
         }
     },
     created() {
         if(this.$route.path.indexOf('admin') !== -1){
             this.main = false;
         }
-    },
+    }
 };
 </script>
 <style>
     body {
         margin: 0px;
         background-color: #EEEEEE;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(./assets/background.jpg);
     }
     @media screen and (max-width:1300px) and (min-width:1024px){
         .home{

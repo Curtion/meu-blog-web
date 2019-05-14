@@ -129,4 +129,7 @@ export default {
         display: flex;
         justify-content: center;
     }
+    .el-card >>> .el-card__header {
+        background-color: #FFDAB9;
+    }
 </style>
