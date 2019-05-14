@@ -6,8 +6,11 @@
                     <a v-html="item.title" @click="url(item.id)"></a>
                 </div>
             </div>
+            <div class="box">
+                <img :src="getImg()" height="120" style="vertical-align: middle; padding-right: 10px;" referrerpolicy="no-referrer">
+                <span style="vertical-align: middle;">{{summary(item.content)}}</span>
+            </div>        
             <div class="text item">
-                <span>{{summary(item.content)}}</span>
                 <hr>
                 <div class="bottom">
                     <div class="time">{{getDate(item.time*1000)}}</div>
@@ -88,12 +91,19 @@ export default {
                 this.count = res.info.count;
                 this.page = res.info.page;
             });
+        },
+        getImg: function() {
+            return 'https://uploadbeta.com/api/pictures/random/?date' + Math.random()
         }
     }
 }
 </script>
 
 <style scoped>
+    .box {
+        display: flex;
+        justify-content: space-between;
+    }
     .box-card {
         margin-bottom: 5px;
     }
@@ -130,6 +140,6 @@ export default {
         justify-content: center;
     }
     .el-card >>> .el-card__header {
-        background-color: #FFDAB9;
+        background-color: #FFC0CB;
     }
 </style>
