@@ -140,6 +140,6 @@ export default {
         justify-content: center;
     }
     .el-card >>> .el-card__header {
-        background-color: #FFC0CB;
+        background-color: #AEEEEE;
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="header-meu">
-        <el-menu :default-active="index" class="el-menu-demo" mode="horizontal" :router="true" background-color="#FFC0CB" text-color="#8B7D7B" active-text-color="#CD1076">
+        <el-menu :default-active="index" class="el-menu-demo" mode="horizontal" :router="true" background-color="#AEEEEE" text-color="#8B7D7B" active-text-color="#CD1076">
             <el-menu-item index="1" :route="{path: '/'}">首页</el-menu-item>
             <el-menu-item index="2" :route="{path: '/archive'}">归档</el-menu-item>
             <el-menu-item index="3" :route="{path: '/tags'}">标签</el-menu-item>
