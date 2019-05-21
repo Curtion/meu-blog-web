@@ -57,7 +57,7 @@
                 <el-table-column
                 prop="kindname"
                 label="分类"
-                width="200px">
+                width="100px">
                 </el-table-column>
                 <el-table-column
                 prop="time"
