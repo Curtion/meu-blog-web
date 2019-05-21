@@ -48,8 +48,7 @@
                 v-loading="loading"
                 @selection-change="change">
                 <el-table-column
-                type="selection"
-                width="55">
+                type="selection">
                 </el-table-column>
                 <el-table-column
                 prop="title"
@@ -58,16 +57,16 @@
                 <el-table-column
                 prop="kindname"
                 label="分类"
-                width="350px">
+                width="200px">
                 </el-table-column>
                 <el-table-column
                 prop="time"
                 label="发表时间"
-                width="350px">
+                width="200px">
                 </el-table-column>
                 <el-table-column
                 label="操作"
-                width="240px">
+                width="200px">
                 <template slot-scope="scope">
                     <el-button
                     size="mini"
